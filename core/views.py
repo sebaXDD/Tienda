@@ -3,6 +3,8 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -69,6 +71,7 @@ def blog(request):
 def shopdetails(request):
     return render(request, ('core/shop-details.html'))
 
+@login_required
 def shopgrid(request):
     return render(request, ('core/shop-grid.html'))
 

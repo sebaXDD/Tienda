@@ -17,17 +17,9 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <li><a href="#">Collar</a></li>
+                            <li><a href="#">Identificador</a></li>
+                            <li><a href="#">Correa</a></li>
                         </ul>
                     </div>
                 </div>
@@ -35,10 +27,6 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="#">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
                                 <input type="text" placeholder="¿Que necesitas?">
                                 <button type="submit" class="site-btn">Buscar</button>
                             </form>
@@ -87,16 +75,7 @@
                             <h5><a href="#">Vegetables</a></h5>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=" {% static 'core/img/categories/cat-4.jpg'%}">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg=" {% static 'core/img/categories/cat-5.jpg'%}">
-                            <h5><a href="#">Meat</a></h5>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -113,11 +92,10 @@
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
-                            <li data-filter=".fresh-meat">Fresh Meat</li>
-                            <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
+                            <li class="active" data-filter="*">Todo</li>
+                            <li data-filter=".oranges">Collares</li>
+                            <li data-filter=".fresh-meat">Identificadores</li>
+                            <li data-filter=".vegetables">Correas</li>
                         </ul>
                     </div>
                 </div>
@@ -143,11 +121,7 @@
                         <div class="featured__item__text">
                             <h6><a href="#">{{ aux.nombre }}</a></h6>
                             <h5>${{ aux.precio }}</h5>
-                            {% if aux.stock > 100 %}
                             <h5>Stock disponible: {{ aux.stock }}</h5>
-                            {% else %}
-                            <h5>Stock: agotado</h5>   
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -158,24 +132,6 @@
     </section>
     <!-- Featured Section End -->
 
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src=" {% static 'core/img/banner/banner-1.jpg'%}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src=" {% static 'core/img/banner/banner-2.jpg'%}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
 
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
