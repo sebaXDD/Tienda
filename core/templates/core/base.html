@@ -130,7 +130,7 @@
                                 {% if user.is_authenticated %}
                                 <a href="{% url 'logout' %}"><i class="fa fa-user"></i> logout</a>
                                 {% else %}
-                                <a href="" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-user"></i>Login</a>
+                                <a href="{% url 'login' %}"><i class="fa fa-user"></i>Login</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -179,62 +179,6 @@
         </div>
     </header>
 
-    <!-- INICIO FOOTER-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content modal-login">
-            <div class="modal-header">
-              <img src="img/logozorro.png" alt="Avatar Logo" style="width:65px;" class="rounded-circle shadow-xl mx-auto d-block"> 
-            </div>
-            <div class="modal-body">
-              <div class="text-center">
-                <h3>¡Animate a iniciar sesión!</h3>
-              </div>
-              <form>
-                <div class="form-group">
-                  <label for="usuario">Usuario</label>
-                  <input type="text" class="form-control text center" id="usuario" placeholder="Introduce tu usuario">
-                </div>
-                <div class="form-group">
-                  <label for="contrasena">Contraseña</label>
-                  <input type="password" class="form-control" id="contrasena" placeholder="Introduce tu contraseña">
-                </div >
-                <div class="text-center">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="bloque-1">
-                          <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">
-                              Recuerdame
-                            </label>
-                          </div>
-                          
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="bloque-2">
-                          <a class="href-login" data-toggle="modal" data-target="#olvide-contrasenna" href="">Olvide la contraseña</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <a class="btn btn-naranjo" href="inicio de sesion/index-inicio.html">Iniciar sesion</a>
-                <div class="container-fluid"> 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <label>No soy un miembro? <a class="href-login" href="registrarse.html">Registrarse</a></label>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- FINAL  FOOTER-->
       
     <!-- Header Section End -->
     {% block contenido %}
@@ -251,7 +195,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{% static 'core/img/logo.png' %}" alt=""></a>
+                            <a href="./index.html"><img src="{% static 'core/img/logo1.png' %}" alt=""></a>
                         </div>
                         <ul>
                             <li>Direccion: Avenida Concha Y Toro, Av. San Carlos 1340, Puente Alto, Región Metropolitana</li>
@@ -287,7 +231,7 @@
                         <p>Obten informacion sobre ofertas de nuestra tienda a tu Email.</p>
                         <form action="#">
                             <input type="text" placeholder="Ingresa tu correo">
-                            <button type="submit" class="site-btn">Suscribete</button>
+                            <button type="submit" class="site-btn" style="background-color:#295690;">Suscribete</button>
                         </form>
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
