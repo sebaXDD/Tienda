@@ -12,7 +12,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=30)
     precio = models.IntegerField()
     stock = models.IntegerField()
-    descripcion = models.CharField(max_length=300)
+    descripcion = models.CharField(max_length=3000)
     tipo = models.ForeignKey(TipoProducto, on_delete=models.CASCADE)
     imagen = models.ImageField(null=True,blank=True)
     
