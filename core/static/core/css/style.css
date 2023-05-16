@@ -334,6 +334,7 @@ ol {
 	top: 23px;
 	opacity: 1;
 	visibility: visible;
+	width: 100px;
 }
 
 .header__top__right__language:after {
