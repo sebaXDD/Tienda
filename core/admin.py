@@ -12,3 +12,5 @@ class ProductoAdmin(admin.ModelAdmin):
 
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(TipoProducto)
+admin.site.register(Carrito)
+admin.site.register(ItemCarrito)

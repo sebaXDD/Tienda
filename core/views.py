@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from .models import *
 from .forms import *
+import random
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -12,8 +13,10 @@ from django.contrib.auth.decorators import login_required
 #listo productos en index
 def index(request):
     productosAll=Producto.objects.all()#select * from producto
+    objeto_aleatorio = Producto.objects.all().order_by('?')
     data={
-        'listaProducto':productosAll
+        'listaProducto':productosAll,
+        'random':objeto_aleatorio
     }
 
     return render(request, 'core/index.html',data)
@@ -80,3 +83,21 @@ def shoppingcart(request):
 
 def blogdetails(request):
     return render(request, ('core/blog-details.html'))
+
+def lista_collar(request):
+    lista = Producto.objects.filter(tipo='collar').all()
+
+    data = {
+        'listaProductos' : lista
+    }
+
+    return render(request, ('core/pagina-collar.html'), data)
+
+def lista_correa(request):
+    lista = Producto.objects.filter(tipo='correa').all()
+
+    data = {
+        'listaProductos' : lista
+    }
+
+    return render(request, ('core/pagina-collar.html'), data)
