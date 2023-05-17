@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from .models import *
 from .forms import *
 import random
@@ -101,3 +101,27 @@ def lista_correa(request):
     }
 
     return render(request, ('core/pagina-collar.html'), data)
+
+
+
+
+def agregar_producto_carrito(request, id):
+    producto = get_object_or_404(Producto, id= id)
+    carrito, created = Carrito.objects.get_or_create(usuario=request.user, activo=True)
+    item, item_created = ItemCarrito.objects.get_or_create(carrito=carrito, producto=producto)
+    if not item_created:
+        item.cantidad += 1
+        item.save()
+    return redirect('ver_carrito')
+
+def ver_carrito(request):
+    carrito = Carrito.objects.get(usuario=request.user, activo=True)
+    items = ItemCarrito.objects.filter(carrito=carrito)
+    total = sum(item.producto.precio * item.cantidad for item in items)
+    return render(request, 'core/shoping-cart.html', {'productos': items, 'total': total})
+
+
+def eliminar_producto_carrito(request, id):
+    item = ItemCarrito.objects.get(id=id)
+    item.delete()
+    return redirect('ver_carrito')

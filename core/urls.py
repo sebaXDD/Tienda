@@ -16,6 +16,11 @@ urlpatterns = [
     path('shopingCart/',shoppingcart,name="shopingCart"),
 
 
+    path('agregar/<id>/', agregar_producto_carrito, name='agregar_carrito'),
+    path('ver/', ver_carrito, name='ver_carrito'),
+    path('eliminar/<id>/', eliminar_producto_carrito, name='eliminar_carrito'),
+
+    
     path('add-producto/',add,name="add-producto"),
     path('update-producto/<id>/',update,name="update-producto"),
     path('delete/<id>/',delete,name="delete"),
