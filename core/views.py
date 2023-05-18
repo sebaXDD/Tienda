@@ -5,6 +5,7 @@ import random
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -125,3 +126,10 @@ def eliminar_producto_carrito(request, id):
     item = ItemCarrito.objects.get(id=id)
     item.delete()
     return redirect('ver_carrito')
+
+
+def cantidad_items_carrito(request):
+    carrito = Carrito.objects.get(usuario=request.user, activo=True)
+    items = ItemCarrito.objects.filter(carrito=carrito)
+    cantidad_items = items.count()
+    return JsonResponse({'cantidad_items': cantidad_items})
