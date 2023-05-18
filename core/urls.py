@@ -12,6 +12,7 @@ urlpatterns = [
     path('blogDetails/',blogdetails,name="blogDetails"),
     path('checkout/',checkout,name="checkout"),
     path('shopDetails/',shopdetails,name="shopDetails"),
+    path('product-details/<int:id>/', product_details, name='product-details'),
     path('shopgrid/',shopgrid,name="shopGrid"),
     path('shopingCart/',shoppingcart,name="shopingCart"),
 

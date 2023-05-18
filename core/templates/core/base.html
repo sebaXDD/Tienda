@@ -33,9 +33,6 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -157,11 +154,10 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
-                            <li class="active"><a href="{% url 'shopGrid' %}">Shop</a></li>
+                            <li class="active"><a href="{% url 'shopingCart' %}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="{% url 'shopDetails' %}">Shop Details</a></li>
-                                    <li><a href="{% url 'shopingCart' %}">Shoping Cart</a></li>
                                     <li><a href="{% url 'checkout' %}">Check Out</a></li>
                                     <li><a href="{% url 'blogDetails' %}">Blog Details</a></li>
                                 </ul>
@@ -175,7 +171,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
@@ -222,14 +218,6 @@
                             <li><a href="#">Delivery infomation</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contactanos</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
                         </ul>
                     </div>
                 </div>
