@@ -33,9 +33,6 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -157,7 +154,11 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
-                            <li class="active"><a href="{% url 'ver_carrito' %}">Carrito</a></li>
+
+                            <li class="active"><a href="{% url 'shopingCart' %}">Shop</a></li>
+
+                            <li class="active"><a href="{% url 'shopingCart' %}">Carrito</a></li>
+
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="{% url 'shopDetails' %}">Shop Details</a></li>
@@ -174,7 +175,11 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="{% url 'ver_carrito' %}"><i class="fa fa-shopping-bag"></i><span id="cantidad-items"></span></a></li>
+
+                            <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+
+                            <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span>9</span></a></li>
+
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
@@ -264,7 +269,6 @@
     <script src="{% static 'core/js/mixitup.min.js' %}"></script>
     <script src="{% static 'core/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'core/js/main.js' %}"></script>
-    <script src="{% static 'core/js/prueba.js' %}"></script>
   {% block js %}
 
   {% endblock %}

@@ -22,6 +22,23 @@ def index(request):
 
     return render(request, 'core/index.html',data)
 
+from django.shortcuts import render
+from .models import Producto
+
+def product_details(request, id):
+    producto = Producto.objects.get(id=id)
+    objeto_aleatorio = Producto.objects.all().order_by('?')
+    context = {
+        'producto': producto,
+        'random':objeto_aleatorio
+    }
+    
+    
+    return render(request, 'core/shop-details.html', context)
+
+    
+
+
 def add(request):
     data = {
         'form' : ProductoForm()
@@ -73,7 +90,11 @@ def blog(request):
     return render(request,('core/blog.html'))
 
 def shopdetails(request):
-    return render(request, ('core/shop-details.html'))
+    objeto_aleatorio = Producto.objects.all().order_by('?')
+    data={
+        'random':objeto_aleatorio
+    }
+    return render(request, 'core/shop-details.html', data)
 
 @login_required
 def shopgrid(request):
