@@ -154,7 +154,11 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
+
                             <li class="active"><a href="{% url 'shopingCart' %}">Shop</a></li>
+
+                            <li class="active"><a href="{% url 'shopingCart' %}">Carrito</a></li>
+
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="{% url 'shopDetails' %}">Shop Details</a></li>
@@ -163,7 +167,7 @@
                                 </ul>
                             </li>
                             <li><a href="{% url 'blog' %}">Blog</a></li>
-                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            <li><a href="{% url 'contact' %}">Contactanos</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -171,7 +175,11 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+
                             <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+
+                            <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span>9</span></a></li>
+
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -22,7 +23,10 @@ class Producto(models.Model):
 
 
 class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     productos = models.ManyToManyField(Producto, through='ItemCarrito')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    activo = models.BooleanField(default=True)
     # Otros campos relevantes para tu carrito
 
     def __str__(self):

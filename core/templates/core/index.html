@@ -153,7 +153,15 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ aux.nombre }}</h6>
+
                                             <span>${{ aux.precio | intcomma }}</span>
+
+                                            <span>${{ aux.precio }}</span>
+                                            <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="submit" value="Agregar al carrito">
+                                            </form>
+
                                         </div>
                                     </a>
                                 {% endfor %}
