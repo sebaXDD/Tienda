@@ -1,0 +1,129 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/style_user-setting.css' %}" type="text/css">
+{% endblock %}
+
+{% block contenido %}
+
+<body>
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'core/img/breadcrumb.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Configuración de usuario</h2>
+                        <div class="breadcrumb__option">
+                            <a href="{% url 'index' %}">Home</a>
+                            <span>Configuracion de usuario</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  <div class="container mt-4">
+
+    
+    <div class="row">
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="text-center">
+          <div class="profile-img-circle">
+            <img src="path/to/default-user-image.jpg" alt="Imagen de Usuario" class="profile-img">
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-primary">Cambiar Imagen</button>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      
+
+      
+      <div class="col-md-8">
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre de Usuario:</label>
+            <input type="text" class="form-control" id="nombre" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" class="form-control" id="contrasena" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="confirmar-contrasena">Confirmar Contraseña:</label>
+            <input type="password" class="form-control" id="confirmar-contrasena" required>
+          </div>
+          
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary mr-2">Guardar Cambios</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarCuentaModal">Eliminar Cuenta</button>
+          </div>
+
+          <hr>
+
+          <h2>Cancelar Suscripción</h2>
+          <p>Si deseas cancelar tu suscripción, haz clic en el botón "Cancelar Suscripción" a continuación.</p>
+          <button class="btn btn-danger" data-toggle="modal" data-target="#cancelSubscriptionModal">Cancelar Suscripción</button>
+        </div>
+        
+        <!-- Modal para confirmar la cancelación de la suscripción -->
+        <div class="modal fade" id="cancelSubscriptionModal" tabindex="-1" role="dialog" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="cancelSubscriptionModalLabel">Cancelar Suscripción</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>¿Estás seguro de que deseas cancelar tu suscripción? Perderás acceso a todos los beneficios de la suscripción.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger">Cancelar Suscripción</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal para confirmar la eliminación de la cuenta -->
+  <div class="modal fade" id="eliminarCuentaModal" tabindex="-1" role="dialog" aria-labelledby="eliminarCuentaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarCuentaModalLabel">Eliminar Cuenta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  </html>
+        
+
+  
+{% endblock %}
+{% block js %}
+
+{% endblock %}

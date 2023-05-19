@@ -124,6 +124,9 @@ def lista_correa(request):
 
     return render(request, ('core/pagina-collar.html'), data)
 
+def user_setting(request):
+    return render(request,('core/user-setting.html'))
+
 
 
 

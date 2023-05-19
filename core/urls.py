@@ -26,4 +26,5 @@ urlpatterns = [
     path('add-producto/',add,name="add-producto"),
     path('update-producto/<id>/',update,name="update-producto"),
     path('delete/<id>/',delete,name="delete"),
+    path('user_setting/',user_setting,name="user_setting"),
 ]
