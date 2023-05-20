@@ -3,6 +3,11 @@ from django.forms import ModelForm
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import *
+from django.contrib.auth.models import User
+
+
 class ProductoForm(ModelForm):
     
     nombre = forms.CharField(min_length=4,widget=forms.TextInput(attrs={"placeholder":"Ingrese Nombre"}))
@@ -21,3 +26,10 @@ class ProductoForm(ModelForm):
 
 class CustomUserCreationForm(UserCreationForm):
     pass
+
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']

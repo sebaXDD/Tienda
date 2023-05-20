@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
 
 
+
+
 # Create your views here.
 
 
@@ -173,3 +175,16 @@ def register(request):
             return redirect(to='index')
         data["form"] = formulario
     return render(request, 'registration/register.html', data)
+
+
+def edit(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = UserEditForm(instance=user)
+
+    return render(request, 'core/user-setting.html', {'form': form})
