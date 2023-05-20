@@ -16,17 +16,20 @@ from django.contrib.auth import authenticate, login
 
 #listo productos en index
 def index(request):
-    productosAll=Producto.objects.all()#select * from producto
+    tipo_id = request.GET.get('tipo_id')
+    if tipo_id:
+        productos_filtrados = Producto.objects.filter(tipo__id=tipo_id)
+    else:
+        productos_filtrados = Producto.objects.all()
+        
     objeto_aleatorio = Producto.objects.all().order_by('?')
-    data={
-        'listaProducto':productosAll,
-        'random':objeto_aleatorio
+
+    data = {
+        'listaProducto': productos_filtrados,
+        'random': objeto_aleatorio,
     }
 
-    return render(request, 'core/index.html',data)
-
-from django.shortcuts import render
-from .models import Producto
+    return render(request, 'core/index.html', data)
 
 def product_details(request, id):
     producto = Producto.objects.get(id=id)
@@ -131,7 +134,7 @@ def user_setting(request):
     return render(request,('core/user-setting.html'))
 
 
-
+#######inicio crud del carrito
 
 def agregar_producto_carrito(request, id):
     producto = get_object_or_404(Producto, id= id)
@@ -154,6 +157,10 @@ def eliminar_producto_carrito(request, id):
     item.delete()
     return redirect('ver_carrito')
 
+##################fin crud carrito#####################
+
+
+###########comienzo mostrar distintos valores de carrito################
 
 def cantidad_items_carrito(request):
     carrito = Carrito.objects.get(usuario=request.user, activo=True)
@@ -161,6 +168,16 @@ def cantidad_items_carrito(request):
     cantidad_items = items.count()
     return JsonResponse({'cantidad_items': cantidad_items})
 
+def obtener_total_carrito(request):
+    carrito = Carrito.objects.get(usuario=request.user, activo=True)
+    items = ItemCarrito.objects.filter(carrito=carrito)
+    total = sum(item.producto.precio * item.cantidad for item in items)
+    return JsonResponse({'total_carrito': total})
+######fin de el area para mostrar los obejto de carrito##################
+
+
+
+######################Registro##########################################
 def register(request):
     data = {
         'form': CustomUserCreationForm()
@@ -188,3 +205,5 @@ def edit(request):
         form = UserEditForm(instance=user)
 
     return render(request, 'core/user-setting.html', {'form': form})
+#####################Fin registro##################################
+

@@ -1,0 +1,8 @@
+.filter-link {
+    color: #000; /* Cambia el color del texto del enlace */
+   
+}
+  
+.filter-link:hover {
+    color: #000; /* Cambia el color del texto al pasar el mouse sobre el enlace */
+}

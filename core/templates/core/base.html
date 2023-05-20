@@ -166,9 +166,8 @@
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
 
-                            <li class="active"><a href="{% url 'shopingCart' %}">Shop</a></li>
 
-                            <li class="active"><a href="{% url 'shopingCart' %}">Carrito</a></li>
+                            <li ><a href="{% url 'shopingCart' %}">Carrito</a></li>
 
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
@@ -189,7 +188,7 @@
                             <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span id="cantidad-items"></span></a></li>
 
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">Total:  <span id="total-carrito"></span></div>
                     </div>
                 </div>
             </div>
@@ -197,6 +196,7 @@
                 <i class="fa fa-bars"></i>
             </div>
         </div>
+        
     </header>
 
       
@@ -280,6 +280,7 @@
     <script src="{% static 'core/js/prueba.js' %}"></script>
   {% block js %}
 
+  
   {% endblock %}
 
 </body>
