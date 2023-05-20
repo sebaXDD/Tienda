@@ -1,8 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import *
-
-#crear template de un formulario
+from django.contrib.auth.forms import UserCreationForm
 
 class ProductoForm(ModelForm):
     
@@ -19,3 +18,6 @@ class ProductoForm(ModelForm):
         widgets = {
             'vencimiento' : forms.SelectDateWidget(years=range(1960,2024))
         }
+
+class CustomUserCreationForm(UserCreationForm):
+    pass
