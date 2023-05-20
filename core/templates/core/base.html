@@ -125,8 +125,18 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                {% if user.is_authenticated %}
+                                {% if user.is_authenticated and user.is_staff %}
                                 
+                                <div class="header__top__right__language">
+                                    <div class="fa fa-user"> Bienvenido</div>
+                                    <span class="arrow_carrot-down"></span>
+                                    <ul>
+                                        <li><a href="{% url 'logout' %}"><i class="fa fa-user"></i> Salir</a></li>
+                                        <li><a href="{% url 'user_setting' %}"><i class="fa fa-user"></i> Setting</a></li>
+                                        <li><a href="{% url 'add-producto' %}"><i class="fa fa-user"></i> Agregar Producto</a></li>
+                                    </ul>
+                                </div>
+                                {% elif user.is_authenticated %}
                                 <div class="header__top__right__language">
                                     <div class="fa fa-user"> Bienvenido</div>
                                     <span class="arrow_carrot-down"></span>
@@ -135,7 +145,6 @@
                                         <li><a href="{% url 'user_setting' %}"><i class="fa fa-user"></i> Setting</a></li>
                                     </ul>
                                 </div>
-                                
                                 {% else %}
                                 <a href="{% url 'login' %}"><i class="fa fa-user"></i>Login</a>
                                 {% endif %}

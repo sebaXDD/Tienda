@@ -4,7 +4,7 @@
 
 {% load humanize %} 
 {% block css %}
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block contenido %}
@@ -115,8 +115,14 @@
                             {% endif %}
                             <ul class="featured__item__pic__hover">
                                 {% if user.is_authenticated and user.username == 'admin' %}
-                                <li><a href="{% url 'update-producto' aux.id %}"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="{% url 'delete' aux.id %}" class="fa fa-trash"></a></li>
+                                <li><a href="{% url 'update-producto' aux.id %}"><i class="fa fa-arrows-rotate"></i></a></li>
+                                <li><a href="{% url 'delete' aux.id %}" class="fa fa-trash fa-shake"></a></li>
+                                <li>   
+                                    <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <a href="{% url 'agregar_carrito' aux.id %}" class="fa fa-cart-shopping fa-shake"></a>
+                                    </form>
+                                </li>
                                 {% else %}
                                 <li><a href="{% url 'product-details' aux.id %}"><i class="fa fa-retweet"></i></a></li>
                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>

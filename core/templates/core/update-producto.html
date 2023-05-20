@@ -7,7 +7,21 @@
 {% endblock %}
 
 {% block contenido %}
-
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'core/img/nose.png' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Actualizar producto</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'index' %}">Home</a>
+                        <span>Actualizar Producto</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 m-5">
