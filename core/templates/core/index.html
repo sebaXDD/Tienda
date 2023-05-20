@@ -2,9 +2,10 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+
 {% load humanize %} 
 {% block css %}
-
+    <link rel="stylesheet" href="{% static 'core/css/estiloLOL.css' %}" type="text/css">
 {% endblock %}
 
 {% block contenido %}
@@ -94,10 +95,10 @@
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">Todo</li>
-                            <li data-filter=".oranges">Collares</li>
-                            <li data-filter=".fresh-meat">Identificadores</li>
-                            <li data-filter=".vegetables">Correas</li>
+                            <li class="active" data-filter="*"><a href="{% url 'index' %}" class="filter-link">Todo</a></li>
+                            <li class="active"><a href="{% url 'index' %}?tipo_id=3" class="filter-link">Identificacion</a></li>
+                            <li class="active"><a href="{% url 'index' %}?tipo_id=2" class="filter-link">Collar</a></li>
+                            <li class="active"><a href="{% url 'index' %}?tipo_id=1" class="filter-link">Correa</a></li>
                         </ul>
                     </div>
                 </div>
@@ -129,10 +130,12 @@
                             <h5>Stock disponible: {{ aux.stock }}</h5>
                         </div>
                     </div>
-                </div>
+                </div> 
+                
                 {% endif %}
                 {% endfor %}
             </div>
+            
         </div>
     </section>
     <!-- Featured Section End -->
@@ -211,6 +214,7 @@
                                         <span>${{ aux.precio | intcomma  }}</span>
                                     </div>
                                 </a>
+                                
                                 {% endfor %}
                             </div>
                         </div>

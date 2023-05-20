@@ -7,3 +7,16 @@ $(document).ready(function() {
       }
     });
   });
+
+$(document).ready(function() {
+  $.ajax({
+    url: '/obtener_total_carrito/',
+    success: function(response) {
+      var totalCarrito =response.total_carrito
+      $('#total-carrito').text(totalCarrito);
+    },
+    error: function(xhr, status, error) {
+      console.error('Error en la solicitud AJAX:', status, error);
+    }
+  });
+});
