@@ -118,10 +118,6 @@ def blogdetails(request):
 
 
 
-def user_setting(request):
-    return render(request,('core/user-setting.html'))
-
-
 #######inicio crud del carrito
 
 def agregar_producto_carrito(request, id):
@@ -215,7 +211,7 @@ def register(request):
 
 
 
-def modificar_cosas_user(request, cosas_user_id):
+#def modificar_cosas_user(request, cosas_user_id):
     cosas_user = get_object_or_404(CosasUser, id=cosas_user_id)
     
     if request.method == 'POST':
@@ -232,21 +228,35 @@ def modificar_cosas_user(request, cosas_user_id):
     return render(request, 'core/blog-details.html', context)
 
 
-def mostrar_cosas_user(request):
-    objetos = CosasUser.objects.all()
-    return render(request, 'core/blog-details.html', {'objetos': objetos})
+#def mostrar_cosas_user(request):
+#    objetos = CosasUser.objects.all()
+#    return render(request, 'core/blog-details.html', {'objetos': objetos})
 
-def ver_cosas_user(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    cosas_user = user.cosasuser_set.all()
+#def ver_cosas_user(request, user_id):
+#   user = get_object_or_404(User, id=user_id)
+#    cosas_user = user.cosasuser_set.all()
     
-    context = {
-        'user': user,
-        'cosas_user': cosas_user,
-    }
+#    context = {
+#        'user': user,
+#        'cosas_user': cosas_user,
+#    }
     
-    return render(request, 'core/blog-details.html', context)
+#    return render(request, 'core/blog-details.html', context)
 
 
 #####################Fin registro##################################
 
+def user_setting(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = CosasUserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+
+
+
+    else:
+        form = CosasUserForm(instance=user)
+
+    return render(request, 'core/user-setting.html', {'form': form, })

@@ -32,4 +32,4 @@ class CustomUserCreationForm(UserCreationForm):
 class CosasUserForm(forms.ModelForm):
     class Meta:
         model = CosasUser
-        fields = ['imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']
+        fields = '__all__'
