@@ -69,17 +69,17 @@
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg=" {% static 'core/img/categories/collares.png'%}">
-                            <h5><a href="#">Collares</a></h5>
+                            <h5><a href="{% url 'index' %}?tipo_id=2#productos-destacados">Collar</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg=" {% static 'core/img/categories/correas.png'%}">
-                            <h5><a href="#">Correas</a></h5>
+                            <h5><a href="{% url 'index' %}?tipo_id=1#productos-destacados" class="filter-link">Correa</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg=" {% static 'core/img/categories/identificacion.png'%}">
-                            <h5><a href="#">Credenciales</a></h5>
+                            <h5><a href="{% url 'index' %}?tipo_id=3#productos-destacados">Identificacion</a></h5>
                         </div>
                     </div>
 
@@ -109,7 +109,6 @@
             </div>
             <div class="row featured__filter">
                 {% for aux in listaProducto %}
-                {% if aux.stock > 9 %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg">
@@ -151,7 +150,6 @@
                     </div>
                 </div> 
                 
-                {% endif %}
                 {% endfor %}
             </div>
             
@@ -169,31 +167,75 @@
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                {% for aux in random|slice:":3" %}
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src= "{{ aux.imagen.url }}" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>{{ aux.nombre }}</h6>
+                                {% if user.is_authenticated %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
 
-                                            <span>${{ aux.precio | intcomma }}</span>
-                                        </div>
-                                    </a>
-                                {% endfor %}
+                                                <span>${{ aux.precio | intcomma }}</span>
+
+                                                <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="submit" value="Agregar al carrito" style="background-color:#004e8e;color: white;">
+                                                </form>
+                                            </div>
+
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            
+                                        </a>
+                                    {% endfor %}                                    
+                                {% endif %}
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                {% for aux in random|slice:":3" %}
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src= "{{ aux.imagen.url }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ aux.nombre }}</h6>
-                                        <span>${{ aux.precio | intcomma  }}</span>
-                                    </div>
-                                </a>
-                                {% endfor %}
+                                {% if user.is_authenticated %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                                <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="submit" value="Agregar al carrito" style="background-color:#004e8e;color: white;">
+                                                </form>
+                                            </div>
+
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            
+                                        </a>
+                                    {% endfor %}                                    
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -203,31 +245,74 @@
                         <h4>Top Rated Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                {% for aux in random|slice:":3" %}
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src= "{{ aux.imagen.url }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ aux.nombre }}</h6>
-                                        <span>${{ aux.precio | intcomma  }}</span>
-                                    </div>
-                                </a>
-                                {% endfor %}
+                                {% if user.is_authenticated %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                                <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="submit" value="Agregar al carrito" style="background-color:#004e8e;color: white;">
+                                                </form>
+                                            </div>
+
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            
+                                        </a>
+                                    {% endfor %}                                    
+                                {% endif %}
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                {% for aux in random|slice:":3" %}
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src= "{{ aux.imagen.url }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ aux.nombre }}</h6>
-                                        <span>${{ aux.precio | intcomma  }}</span>
-                                    </div>
-                                </a>
-                                
-                                {% endfor %}
+                                {% if user.is_authenticated %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                                <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="submit" value="Agregar al carrito" style="background-color:#004e8e;color: white;">
+                                                </form>
+                                            </div>
+
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            
+                                        </a>
+                                    {% endfor %}                                    
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -237,31 +322,72 @@
                         <h4>Review Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                {% for aux in random|slice:":3" %}
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src= "{{ aux.imagen.url }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ aux.nombre }}</h6>
-                                        <span>${{ aux.precio | intcomma  }}</span>
-                                    </div>
-                                </a>
-                                {% endfor %}
+                                {% if user.is_authenticated %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
 
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="submit" value="Agregar al carrito" style="background-color:#004e8e;color: white;">
+                                            </form>
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            
+                                        </a>
+                                    {% endfor %}                                    
+                                {% endif %}
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                {% for aux in random|slice:":3" %}
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src= "{{ aux.imagen.url }}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>{{ aux.nombre }}</h6>
-                                        <span>${{ aux.precio | intcomma  }}</span>
-                                    </div>
-                                </a>
-                                {% endfor %}
+                                {% if user.is_authenticated %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                                <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="submit" value="Agregar al carrito" style="background-color:#004e8e;color: white;">
+                                                </form>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for aux in random|slice:":3" %}
+                                        <a href="#" class="latest-product__item">
+                                            <div class="latest-product__item__pic">
+                                                <img src= "{{ aux.imagen.url }}" alt="">
+                                            </div>
+                                            <div class="latest-product__item__text">
+                                                <h6>{{ aux.nombre }}</h6>
+
+                                                <span>${{ aux.precio | intcomma }}</span>
+                                            </div>
+                                            
+                                        </a>
+                                    {% endfor %}                                    
+                                {% endif %}
                             </div>
                         </div>
                     </div>
