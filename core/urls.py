@@ -34,6 +34,7 @@ urlpatterns = [
     ##################urls de los usuarios#######################
     path('user_setting/',user_setting,name="user_setting"),
     path('register/',register,name="register"),
+    path('modificar/<int:cosas_user_id>/',modificar_cosas_user, name='modificar_cosas_user'),
     #############################################################
 
 ]

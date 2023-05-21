@@ -29,7 +29,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 
-class UserEditForm(forms.ModelForm):
+class CosasUserForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        model = CosasUser
+        fields = ['imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']

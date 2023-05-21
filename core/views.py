@@ -112,23 +112,7 @@ def shoppingcart(request):
 def blogdetails(request):
     return render(request, ('core/blog-details.html'))
 
-def lista_collar(request):
-    lista = Producto.objects.filter(tipo='collar').all()
 
-    data = {
-        'listaProductos' : lista
-    }
-
-    return render(request, ('core/pagina-collar.html'), data)
-
-def lista_correa(request):
-    lista = Producto.objects.filter(tipo='correa').all()
-
-    data = {
-        'listaProductos' : lista
-    }
-
-    return render(request, ('core/pagina-collar.html'), data)
 
 def user_setting(request):
     return render(request,('core/user-setting.html'))
@@ -224,16 +208,41 @@ def register(request):
     return render(request, 'registration/register.html', data)
 
 
-def edit(request):
-    user = request.user
+
+
+
+def modificar_cosas_user(request, cosas_user_id):
+    cosas_user = get_object_or_404(CosasUser, id=cosas_user_id)
+    
     if request.method == 'POST':
-        form = UserEditForm(request.POST, instance=user)
+        form = CosasUserForm(request.POST, request.FILES, instance=cosas_user)
         if form.is_valid():
             form.save()
-
+            # Hacer algo después de guardar los cambios, como redirigir a otra página
     else:
-        form = UserEditForm(instance=user)
+        form = CosasUserForm(instance=cosas_user)
+    
+    context = {
+        'form': form
+    }
+    return render(request, 'core/blog-details.html', context)
 
-    return render(request, 'core/user-setting.html', {'form': form})
+
+def mostrar_cosas_user(request):
+    objetos = CosasUser.objects.all()
+    return render(request, 'core/blog-details.html', {'objetos': objetos})
+
+def ver_cosas_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    cosas_user = user.cosasuser_set.all()
+    
+    context = {
+        'user': user,
+        'cosas_user': cosas_user,
+    }
+    
+    return render(request, 'core/blog-details.html', context)
+
+
 #####################Fin registro##################################
 
