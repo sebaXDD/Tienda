@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block css %}
@@ -7,16 +7,14 @@
 {% endblock %}
 
 {% block contenido %}
-
-<h1>Carrito de compras</h1>
-<ul>
-    {% for producto in productos %}
-    <li>
-        {{ producto.nombre }} - ${{ producto.precio }}
-    </li>
-    {% endfor %}
-</ul>
-<p>Total: ${{ total }}</p>
+{% for objeto in objetos %}
+    <h1>{{ objeto.user.username }}</h1>
+    <img src="{{ objeto.imagen.url }}" alt="Imagen">
+    <p>¿Quiere ser suscriptor? {{ objeto.si_quiere_ser_suscripto }}</p>
+    <p>Monto de suscripción: {{ objeto.monto_de_suscripcion }}</p>
+    <p>Fecha de pago: {{ objeto.fecha_de_pago }}</p>
+    <p>Fecha de inscripción: {{ objeto.fecha_de_inscripcion }}</p>
+{% endfor %}
 
 {% endblock %}
 

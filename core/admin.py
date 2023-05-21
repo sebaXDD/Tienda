@@ -32,6 +32,6 @@ class TipoProductoAdmin(admin.ModelAdmin):
     list_editable=['descripcion']
 
 admin.site.register(Producto,ProductoAdmin)
-admin.site.register(ItemCarrito,ItemCarritoAdmin)
-admin.site.register(TipoProducto, TipoProductoAdmin)
-admin.site.register(Carrito,CarritoAdmin)
+admin.site.register(TipoProducto)
+admin.site.register(Carrito)
+admin.site.register(ItemCarrito)

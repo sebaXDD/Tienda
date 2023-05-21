@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils import timezone
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 class TipoProducto(models.Model):
@@ -41,3 +42,22 @@ class ItemCarrito(models.Model):
 
     def __str__(self):
         return f"{self.cantidad}x {self.producto.nombre} en {self.carrito}"
+    
+
+class CosasUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(null=True,blank=True)
+    si_quiere_ser_suscripto = models.BooleanField(default=False)
+    monto_de_suscripcion = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    fecha_de_pago = models.DateField(null=True, blank=True)
+    fecha_de_inscripcion = models.DateTimeField(default=timezone.now, editable=False)
+
+    def save(self, *args, **kwargs):
+        if self.si_quiere_ser_suscripto is False:
+            self.monto_de_suscripcion = None
+            self.fecha_de_pago = None
+        super().save(*args, **kwargs)
+
+
+    def __str__(self):
+        return self.user.username
