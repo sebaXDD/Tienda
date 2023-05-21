@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-
+{% load humanize %} 
 {% block css %}
 
 {% endblock %}
@@ -49,17 +49,16 @@
                                         <h5>{{ producto.producto.nombre }}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        ${{producto.producto.precio}}
+                                        <span>${{ producto.producto.precio | intcomma }}</span>
                                     </td>
                                     <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
+                                        <form method="POST" action="{% url 'actualizar'  producto.id %}">
+                                            {% csrf_token %}
+                                            <input type="number" name="cantidad" min="1" value="{{ producto.cantidad }}">
+                                            <button type="submit" class="btn hvr-hover"><i class="fas fa-sync"></i> Actualizar</button>
+                                        </form>
                                     <td class="shoping__cart__total">
-                                        $110.00
+                                        ${{ producto.total_individual | intcomma  }}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <a class="icon_close" href="{% url 'eliminar_carrito' producto.id %}" ></a>
@@ -95,7 +94,7 @@
                         <h5>Cart Total</h5>
                         <ul>
                             <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>${{ total }}</span></li>
+                            <li>Total <span>${{ total_carrito | intcomma }}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

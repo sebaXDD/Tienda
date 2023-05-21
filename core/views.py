@@ -148,9 +148,15 @@ def agregar_producto_carrito(request, id):
 def ver_carrito(request):
     carrito = Carrito.objects.get(usuario=request.user, activo=True)
     items = ItemCarrito.objects.filter(carrito=carrito)
-    total = sum(item.producto.precio * item.cantidad for item in items)
-    return render(request, 'core/shoping-cart.html', {'productos': items, 'total': total})
 
+    total_carrito = 0  # Total general del carrito
+
+    for item in items:
+        total_producto = item.producto.precio * item.cantidad
+        total_carrito += total_producto
+        item.total_individual = total_producto
+
+    return render(request, 'core/shoping-cart.html', {'productos': items, 'total_carrito': total_carrito})
 
 def eliminar_producto_carrito(request, id):
     item = ItemCarrito.objects.get(id=id)
@@ -173,6 +179,30 @@ def obtener_total_carrito(request):
     items = ItemCarrito.objects.filter(carrito=carrito)
     total = sum(item.producto.precio * item.cantidad for item in items)
     return JsonResponse({'total_carrito': total})
+
+
+def obtener_precio_total(request, producto_id):
+    carrito = Carrito.objects.first()  # Obtén el carrito que deseas utilizar
+
+    try:
+        item = carrito.itemcarrito_set.get(producto_id=producto_id)  # Obtén el item correspondiente al producto
+        precio_total = item.producto.precio * item.cantidad  # Calcula el precio total
+    except ItemCarrito.DoesNotExist:
+        precio_total = 0  # Si no se encuentra el item, establece el precio total en 0
+
+    context = {
+        'precio_total': precio_total,
+    }
+
+    return render(request, 'shoping-cart.html', context)
+
+
+def modificar_cantidad(request, item_id):
+    item = ItemCarrito.objects.get(id=item_id)
+    cantidad = int(request.POST['cantidad'])
+    item.cantidad = cantidad
+    item.save()
+    return redirect('ver_carrito')
 ######fin de el area para mostrar los obejto de carrito##################
 
 

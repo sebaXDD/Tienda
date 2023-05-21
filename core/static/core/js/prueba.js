@@ -20,3 +20,28 @@ $(document).ready(function() {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const botonesIncremento = document.querySelectorAll('.btn-incremento');
+  const botonesDecremento = document.querySelectorAll('.btn-decremento');
+
+  botonesIncremento.forEach(boton => {
+    boton.addEventListener('click', function() {
+      const productoId = this.getAttribute('data-producto-id');
+      const inputCantidad = document.getElementById(`cantidad-${productoId}`);
+      const nuevaCantidad = parseInt(inputCantidad.value) + 1;
+      inputCantidad.value = nuevaCantidad;
+    });
+  });
+
+  botonesDecremento.forEach(boton => {
+    boton.addEventListener('click', function() {
+      const productoId = this.getAttribute('data-producto-id');
+      const inputCantidad = document.getElementById(`cantidad-${productoId}`);
+      const nuevaCantidad = parseInt(inputCantidad.value) - 1;
+      if (nuevaCantidad >= 0) {
+        inputCantidad.value = nuevaCantidad;
+      }
+    });
+  });
+});
