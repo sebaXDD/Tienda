@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login
 
 
 
+
 # Create your views here.
 
 
@@ -252,11 +253,14 @@ def user_setting(request):
     if request.method == 'POST':
         form = CosasUserForm(request.POST, instance=user)
         if form.is_valid():
+            nueva_contraseña = form.cleaned_data['nueva_contraseña']
+            if nueva_contraseña:
+                user.set_password(nueva_contraseña)
+                user.save()
             form.save()
-
-
+            # Realiza cualquier otra acción necesaria después de guardar los cambios
 
     else:
         form = CosasUserForm(instance=user)
 
-    return render(request, 'core/user-setting.html', {'form': form, })
+    return render(request, 'core/user-setting.html', {'form': form})

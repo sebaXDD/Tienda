@@ -30,6 +30,20 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CosasUserForm(forms.ModelForm):
+    nueva_contraseña = forms.CharField(widget=forms.PasswordInput)
+    confirmar_contraseña = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
-        model = CosasUser
-        fields = '__all__'
+        model = User
+        modal = CosasUser
+        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        nueva_contraseña = cleaned_data.get('nueva_contraseña')
+        confirmar_contraseña = cleaned_data.get('confirmar_contraseña')
+
+        if nueva_contraseña and confirmar_contraseña and nueva_contraseña != confirmar_contraseña:
+            raise forms.ValidationError("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.")
+
+        return cleaned_data
