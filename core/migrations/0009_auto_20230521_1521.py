@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='producto',
             name='created_at',
-            field=models.DateTimeField(default=models.DateTimeField(auto_now_add=True)),
+            field=models.DateTimeField(auto_now_add=True),
         ),
         migrations.AddField(
             model_name='producto',
@@ -21,3 +21,4 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(auto_now=True),
         ),
     ]
+

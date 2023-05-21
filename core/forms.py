@@ -35,8 +35,10 @@ class CosasUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        modal = CosasUser
-        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña',]
+        model = CosasUser
+        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña','imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']
+        #fields = ['imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']
+        #fields = '__all__'
 
     def clean(self):
         cleaned_data = super().clean()
