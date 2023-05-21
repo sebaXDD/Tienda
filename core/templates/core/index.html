@@ -24,9 +24,9 @@
                             <span>Todas las categorias</span>
                         </div>
                         <ul>
-                            <li><a href="#">Collares</a></li>
-                            <li><a href="#">Identificadores</a></li>
-                            <li><a href="#">Correas</a></li>
+                            <li><a href="{% url 'index' %}?tipo_id=2#productos-destacados">Collares</a></li>
+                            <li><a href="{% url 'index' %}?tipo_id=3#productos-destacados">Identificadores</a></li>
+                            <li><a href="{% url 'index' %}?tipo_id=1#productos-destacados">Correas</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,14 +95,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2 id="productos-destacados">Productos destacados</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*"><a href="{% url 'index' %}" class="filter-link">Todo</a></li>
-                            <li class="active"><a href="{% url 'index' %}?tipo_id=3" class="filter-link">Identificacion</a></li>
-                            <li class="active"><a href="{% url 'index' %}?tipo_id=2" class="filter-link">Collar</a></li>
-                            <li class="active"><a href="{% url 'index' %}?tipo_id=1" class="filter-link">Correa</a></li>
+                            <li class="active" data-filter="*"><a href="{% url 'index' %}#productos-destacados" class="filter-link">Todo</a></li>
+                            <li class="active"><a href="{% url 'index' %}?tipo_id=3#productos-destacados" class="filter-link">Identificacion</a></li>
+                            <li class="active"><a href="{% url 'index' %}?tipo_id=2#productos-destacados" class="filter-link">Collar</a></li>
+                            <li class="active"><a href="{% url 'index' %}?tipo_id=1#productos-destacados" class="filter-link">Correa</a></li>
                         </ul>
                     </div>
                 </div>
@@ -119,18 +119,27 @@
                             <img src="{% static 'core/img/featured/feature-1.jpg' %}" alt="">
                             {% endif %}
                             <ul class="featured__item__pic__hover">
-                                {% if user.is_authenticated and user.username == 'admin' %}
+                                {% if user.is_authenticated and user.is_staff %}
                                 <li><a href="{% url 'update-producto' aux.id %}"><i class="fa fa-arrows-rotate"></i></a></li>
-                                <li><a href="{% url 'delete' aux.id %}" class="fa fa-trash fa-shake"></a></li>
+                                <li><a href="#" onclick="eliminarProducto({{ aux.id }})"  class="fa fa-trash fa-shake"></a></li>
                                 <li>   
                                     <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
                                         {% csrf_token %}
                                         <a href="{% url 'agregar_carrito' aux.id %}" class="fa fa-cart-shopping fa-shake"></a>
                                     </form>
                                 </li>
+                                <li><a href="{% url 'product-details' aux.id %}"><i class="fa fa-circle-info"></i></a></li>
+                                {% elif user.is_authenticated %}
+                                <li>   
+                                    <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <a href="{% url 'agregar_carrito' aux.id %}" class="fa fa-cart-shopping fa-shake"></a>
+                                    </form>
+                                </li>
+                                <li><a href="{% url 'product-details' aux.id %}"><i class="fa fa-circle-info"></i></a></li>
                                 {% else %}
-                                <li><a href="{% url 'product-details' aux.id %}"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a href="{% url 'product-details' aux.id %}"><i class="fa fa-circle-info"></i></a></li>
+                                <li><a href="{% url 'register' %}"><i class="fa fa-cart-shopping fa-shake"></i></a></li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -169,12 +178,6 @@
                                             <h6>{{ aux.nombre }}</h6>
 
                                             <span>${{ aux.precio | intcomma }}</span>
-
-                                            <form action="{% url 'agregar_carrito' aux.id %}" method="POST">
-                                                {% csrf_token %}
-                                                <input type="submit" value="Agregar al carrito">
-                                            </form>
-
                                         </div>
                                     </a>
                                 {% endfor %}
@@ -300,5 +303,4 @@
     <!-- Blog Section End -->
 {% endblock %}
 {% block js %}
-
 {% endblock %}

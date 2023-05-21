@@ -85,6 +85,10 @@ def home(request):
     return render(request,('core/home.html'))
 
 
+def monitor(request):
+    return render(request,('core/monitor.html'))
+
+
 def contact(request):
     return render(request,('core/contact.html'))
 

@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% load humanize %} 
+{% block css %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'core/css/estiloLOL.css' %}" type="text/css">
+
+
+{% endblock %}
+
+{% block contenido %}
+
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'core/img/nose.png' %}">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12 text-center">
+              <div class="breadcrumb__text">
+                  <h2>Monitor de Compra</h2>
+                  <div class="breadcrumb__option">
+                      <a href="{% url 'index' %}">Home</a>
+                      <span>Monitor de Compra</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+    <div class="container mt-5">
+
+        <hr>
+        <h2>Detalles de la Compra</h2>
+        <div class="row mt-4">
+          <div class="col-md-4">
+            <h4>Información de la Orden</h4>
+            <ul class="list-group">
+              <li class="list-group-item">Fecha: [fecha]</li>
+              <li class="list-group-item">Número de Orden: [número de orden]</li>
+              <li class="list-group-item">Estado de la Orden: [estado de la orden]</li>
+              <li class="list-group-item">Descripción del Producto: [descripción del producto]</li>
+              <li class="list-group-item">Precio: [precio]</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h4>Seguimiento de la Orden</h4>
+            <ul class="list-group">
+              <li class="list-group-item">Costo de Envío: [costo de envío]</li>
+              <li class="list-group-item">Tiempo Estimado de Entrega: [tiempo estimado de entrega]</li>
+              <li class="list-group-item">Proveedor: [proveedor]</li>
+            </ul>
+          </div>
+        </div>
+        <h2 class="mt-5">Historial de Compra</h2>
+        <table class="table table-striped mt-4">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Número de Orden</th>
+              <th>Estado de la Orden</th>
+              <th>Descripción del Producto</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>[fecha]</td>
+              <td>[número de orden]</td>
+              <td>[estado de la orden]</td>
+              <td>[descripción del producto]</td>
+              <td>[precio]</td>
+            </tr>
+            <tr>
+              <td>[fecha]</td>
+              <td>[número de orden]</td>
+              <td>[estado de la orden]</td>
+              <td>[descripción del producto]</td>
+              <td>[precio]</td>
+            </tr>
+            <tr>
+              <td>[fecha]</td>
+              <td>[número de orden]</td>
+              <td>[estado de la orden]</td>
+              <td>[descripción del producto]</td>
+              <td>[precio]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% endblock %}
+      {% block js %}
+      
+      {% endblock %}
