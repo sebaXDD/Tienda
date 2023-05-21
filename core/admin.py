@@ -31,7 +31,12 @@ class TipoProductoAdmin(admin.ModelAdmin):
     list_filter=['descripcion']
     list_editable=['descripcion']
 
+class CosasUserAdmin(admin.ModelAdmin):
+    list_display=['id','imagen','si_quiere_ser_suscripto','monto_de_suscripcion','fecha_de_pago']
+
+
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(TipoProducto, TipoProductoAdmin)
 admin.site.register(Carrito, CarritoAdmin)
 admin.site.register(ItemCarrito, ItemCarritoAdmin)
+admin.site.register(CosasUser, CosasUserAdmin)

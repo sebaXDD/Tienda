@@ -26,7 +26,7 @@ class Producto(models.Model):
 class Carrito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     productos = models.ManyToManyField(Producto, through='ItemCarrito')
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_creacion = models.DateTimeField(default=timezone.now)
     activo = models.BooleanField(default=True)
     # Otros campos relevantes para tu carrito
 

@@ -134,14 +134,30 @@ def ver_carrito(request):
     carrito = Carrito.objects.get(usuario=request.user, activo=True)
     items = ItemCarrito.objects.filter(carrito=carrito)
 
+    subtotal = 0  # Subtotal sin descuento
     total_carrito = 0  # Total general del carrito
 
     for item in items:
         total_producto = item.producto.precio * item.cantidad
-        total_carrito += total_producto
+        subtotal += total_producto
         item.total_individual = total_producto
 
-    return render(request, 'core/shoping-cart.html', {'productos': items, 'total_carrito': total_carrito})
+    cosas_user = CosasUser.objects.get(user=request.user)
+
+    if cosas_user.si_quiere_ser_suscripto:
+        descuento = subtotal * 0.05  # Descuento del 5%
+        total_carrito = subtotal - descuento
+    else:
+        total_carrito = subtotal
+
+    carrito.total_original = subtotal  # Guardar el subtotal antes del descuento
+    carrito.save()
+
+    subtotal_redondeado = round(subtotal,)  # Redondear el subtotal a 2 decimales
+    total_carrito_redondeado = round(total_carrito,)  # Redondear el total a 2 decimales
+
+
+    return render(request, 'core/shoping-cart.html', {'productos': items, 'subtotal': subtotal_redondeado, 'total_carrito': total_carrito_redondeado})
 
 def eliminar_producto_carrito(request, id):
     item = ItemCarrito.objects.get(id=id)
@@ -249,6 +265,7 @@ def register(request):
 
 def user_setting(request):
     user = request.user
+    
 
     if request.method == 'POST':
         form = CosasUserForm(request.POST, instance=user)
