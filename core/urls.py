@@ -14,6 +14,8 @@ urlpatterns = [
     path('product-details/<int:id>/', product_details, name='product-details'),
     path('shopgrid/',shopgrid,name="shopGrid"),
     path('shopingCart/',shoppingcart,name="shopingCart"),
+    path('monitor/',monitor,name="monitor"),
+
 
     ################Urls de carrito de crud y js de producto######
     path('agregar/<id>/', agregar_producto_carrito, name='agregar_carrito'),

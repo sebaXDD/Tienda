@@ -45,5 +45,17 @@
 
 {% endblock %}
 {% block js %}
-
+{% if messages %} 
+    {% for aux in messages %} 
+    <script>
+        Swal.fire({
+        icon: 'success',
+        title: 'Actualizado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+        })
+    </script>
+    {% endfor %} 
+    
+{% endif %}
 {% endblock %}
