@@ -96,7 +96,10 @@
                             <li>Subtotal <span>$ {{ subtotal | intcomma  }}</span></li>
                             <li>Total <span>${{ total_carrito | intcomma }}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <form action="{% url 'eliminar_carrito' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Eliminar carrito</button>
+                        </form>
                     </div>
                 </div>
             </div>
