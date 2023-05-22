@@ -36,6 +36,25 @@ class CosasUserForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and hasattr(self.instance, 'cosasuser'):
+            cosas_user = self.instance.cosasuser
+            self.fields['imagen'] = forms.ImageField(required=False)
+            self.fields['si_quiere_ser_suscripto'] = forms.BooleanField(required=False)
+            self.fields['monto_de_suscripcion'] = forms.DecimalField(
+                max_digits=8,
+                decimal_places=2,
+                required=False
+            )
+            self.fields['fecha_de_pago'] = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+            self.fields['fecha_de_inscripcion'] = forms.DateTimeField(disabled=True, required=False, widget=forms.DateTimeInput(attrs={'readonly': 'readonly'}))
+            self.initial['imagen'] = cosas_user.imagen
+            self.initial['si_quiere_ser_suscripto'] = cosas_user.si_quiere_ser_suscripto
+            self.initial['monto_de_suscripcion'] = cosas_user.monto_de_suscripcion
+            self.initial['fecha_de_pago'] = cosas_user.fecha_de_pago
+            self.initial['fecha_de_inscripcion'] = cosas_user.fecha_de_inscripcion
+
     def clean(self):
         cleaned_data = super().clean()
         nueva_contraseña = cleaned_data.get('nueva_contraseña')

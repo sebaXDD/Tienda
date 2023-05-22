@@ -134,6 +134,13 @@ ol {
 	margin: 0 auto;
 }
 
+.fa-ing {
+    font-size: 1.25em;
+    line-height: 1.05em;
+    vertical-align: -.075em
+}
+
+
 .set-bg {
 	background-repeat: no-repeat;
 	background-size: cover;

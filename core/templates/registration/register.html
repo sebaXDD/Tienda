@@ -1,12 +1,9 @@
 {% extends 'core/base.html' %}
 {% load crispy_forms_tags %}
-
 {% load static %}
-
 {% block css %}
     <link rel="stylesheet" href="{% static 'core/css/stilo_login.css' %}" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 {% block contenido %}
 <section class="h-100 gradient-form" style="background-color: #eee;">
@@ -17,40 +14,31 @@
             <div class="row g-0">
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
-  
+
                   <div class="text-center">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                      style="width: 185px;" alt="logo">
-                    <h4 class="mt-1 mb-5 pb-1">Registrar usuario</h4>
+                    <h4 class="mt-1 mb-5 pb-1">PetShop</h4>
                   </div>
-  
+
                   <form action="" method="post">
-                    <p>Registrar usuario</p>
-  
+                    <p>Por favor, inicia sesión en tu cuenta</p>
+
                     {% csrf_token %}
                     {{ form | crispy  }}
 
                     <div class="text-center pt-1 mb-5 pb-1">
-                      <input class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" value="Registrar" type="submit">Log
-                        in</input>
-                      <a class="text-muted" href="#!">Forgot password?</a>
+                      <input class="btn btn-primary btn-block fa-ing gradient-custom-2 mb-3" value="Registrase" type="submit">Iniciar sesion</input>
+                      <a class="text-muted" href="{% url 'login' %}">¿Inicia sesion ahora?</a>
                     </div>
-  
-                    <div class="d-flex align-items-center justify-content-center pb-4">
-                      <p class="mb-0 me-2">Don't have an account?</p>
-                      <input type="button" class="btn btn-outline-danger">Create new</input>
-                    </div>
-  
+
+
                   </form>
-  
+
                 </div>
               </div>
               <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                  <h4 class="mb-4">We are more than just a company</h4>
-                  <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <h4 class="mb-4">Somos más que una empresa</h4>
+                  <p class="small mb-0">En nuestra fundación sin fines de lucro, promovemos el bienestar animal a través de la venta de productos y servicios. Trabajamos con refugios, dueños responsables y amantes de los animales. Ofrecemos alimentos, juguetes, accesorios y asesoramiento. Nuestros ingresos se destinan a programas de rescate y adopción. Únete a nuestra comunidad comprometida con los animales.</p>
                 </div>
               </div>
             </div>
@@ -58,8 +46,7 @@
         </div>
       </div>
     </div>
-    </section>
-
+</section>
 {% endblock %}
 
 {% block js %}
