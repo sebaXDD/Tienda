@@ -35,10 +35,7 @@ class CosasUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        model = CosasUser
-        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña','imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']
-        #fields = ['imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']
-        #fields = '__all__'
+        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña', 'imagen']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -49,3 +46,4 @@ class CosasUserForm(forms.ModelForm):
             raise forms.ValidationError("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.")
 
         return cleaned_data
+

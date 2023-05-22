@@ -263,9 +263,13 @@ def register(request):
 
 #####################Fin registro##################################
 
+
+
+
+
 def user_setting(request):
     user = request.user
-    
+    cosas_user = user.cosasuser if hasattr(user, 'cosasuser') else None
 
     if request.method == 'POST':
         form = CosasUserForm(request.POST, instance=user)
@@ -275,9 +279,25 @@ def user_setting(request):
                 user.set_password(nueva_contraseña)
                 user.save()
             form.save()
+
+            if cosas_user:
+                cosas_user_form = CosasUserForm(request.POST, instance=cosas_user)
+            else:
+                cosas_user_form = CosasUserForm(request.POST)
+
+            if cosas_user_form.is_valid():
+                cosas_user = cosas_user_form.save(commit=False)
+                cosas_user.user = user
+                cosas_user.save()
+            
             # Realiza cualquier otra acción necesaria después de guardar los cambios
 
     else:
         form = CosasUserForm(instance=user)
+        if cosas_user:
+            cosas_user_form = CosasUserForm(instance=cosas_user)
+        else:
+            cosas_user_form = CosasUserForm()
 
-    return render(request, 'core/user-setting.html', {'form': form})
+    return render(request, 'core/user-setting.html', {'form': form, 'cosas_user_form': cosas_user_form})
+
