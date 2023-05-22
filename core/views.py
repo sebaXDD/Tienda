@@ -204,6 +204,20 @@ def modificar_cantidad(request, item_id):
     item.cantidad = cantidad
     item.save()
     return redirect('ver_carrito')
+
+
+def eliminar_carrito(request):
+    # Obtener el carrito del usuario actual
+    carrito = Carrito.objects.get(usuario=request.user)
+
+    # Eliminar todos los items del carrito
+    carrito.productos.all().delete()
+
+    # Mostrar un mensaje de éxito
+    messages.success(request, 'Se han eliminado todos los productos del carrito.')
+
+    # Redirigir a la página del carrito o a donde desees
+    return redirect('ver_carrito')  # Reemplaza 'carrito' con el nombre de tu URL para el carrito
 ######fin de el area para mostrar los obejto de carrito##################
 
 

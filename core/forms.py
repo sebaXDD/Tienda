@@ -35,7 +35,7 @@ class CosasUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña', 'imagen']
+        fields = ['username', 'first_name', 'last_name', 'email', 'nueva_contraseña']
 
     def clean(self):
         cleaned_data = super().clean()
