@@ -239,79 +239,32 @@ def register(request):
     return render(request, 'registration/register.html', data)
 
 
-
-
-
-#def modificar_cosas_user(request, cosas_user_id):
-    cosas_user = get_object_or_404(CosasUser, id=cosas_user_id)
-    
-    if request.method == 'POST':
-        form = CosasUserForm(request.POST, request.FILES, instance=cosas_user)
-        if form.is_valid():
-            form.save()
-            # Hacer algo después de guardar los cambios, como redirigir a otra página
-    else:
-        form = CosasUserForm(instance=cosas_user)
-    
-    context = {
-        'form': form
-    }
-    return render(request, 'core/blog-details.html', context)
-
-
-#def mostrar_cosas_user(request):
-#    objetos = CosasUser.objects.all()
-#    return render(request, 'core/blog-details.html', {'objetos': objetos})
-
-#def ver_cosas_user(request, user_id):
-#   user = get_object_or_404(User, id=user_id)
-#    cosas_user = user.cosasuser_set.all()
-    
-#    context = {
-#        'user': user,
-#        'cosas_user': cosas_user,
-#    }
-    
-#    return render(request, 'core/blog-details.html', context)
-
-
-#####################Fin registro##################################
-
-
-
-
-
+@login_required
 def user_setting(request):
     user = request.user
     cosas_user = user.cosasuser if hasattr(user, 'cosasuser') else None
 
     if request.method == 'POST':
         form = CosasUserForm(request.POST, instance=user)
-        if form.is_valid():
+        cosas_user_form = CosasUserForm(request.POST, instance=cosas_user)
+
+        if form.is_valid() and cosas_user_form.is_valid():
             nueva_contraseña = form.cleaned_data['nueva_contraseña']
             if nueva_contraseña:
                 user.set_password(nueva_contraseña)
                 user.save()
             form.save()
 
-            if cosas_user:
-                cosas_user_form = CosasUserForm(request.POST, instance=cosas_user)
-            else:
-                cosas_user_form = CosasUserForm(request.POST)
-
-            if cosas_user_form.is_valid():
+            if cosas_user_form.has_changed():
                 cosas_user = cosas_user_form.save(commit=False)
                 cosas_user.user = user
                 cosas_user.save()
-            
+
             # Realiza cualquier otra acción necesaria después de guardar los cambios
 
     else:
         form = CosasUserForm(instance=user)
-        if cosas_user:
-            cosas_user_form = CosasUserForm(instance=cosas_user)
-        else:
-            cosas_user_form = CosasUserForm()
+        cosas_user_form = CosasUserForm(instance=cosas_user)
 
     return render(request, 'core/user-setting.html', {'form': form, 'cosas_user_form': cosas_user_form})
 

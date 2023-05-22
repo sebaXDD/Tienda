@@ -163,9 +163,11 @@
                         <ul>
                             <li><a href="{% url 'index' %}">Home</a></li>
 
-
+                            {% if user.is_authenticated %}
                             <li ><a href="{% url 'shopingCart' %}">Carrito</a></li>
-
+                            {% else %}
+                            
+                            {% endif %}
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="{% url 'checkout' %}">Check Out</a></li>
@@ -181,10 +183,14 @@
                 <div class="col-lg-3">
                     
                     <div class="header__cart">
+                        {% if user.is_authenticated %}
                         <ul>
                             <li><a href="{% url 'shopingCart' %}"><i class="fa fa-shopping-bag"></i> <span id="cantidad-items"></span></a></li>
                         </ul>
                         <div class="header__cart__price">Total: $<span id="total-carrito"></span></div>
+                        {% else %}
+                        
+                        {% endif %}
                     </div>
                 </div>
             </div>
