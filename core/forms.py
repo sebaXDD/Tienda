@@ -2,7 +2,6 @@ from django import forms
 from django.forms import ModelForm
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
-
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import *
 from django.contrib.auth.models import User
@@ -47,3 +46,23 @@ class CosasUserForm(forms.ModelForm):
 
         return cleaned_data
 
+
+class CosasUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = CosasUser
+        fields = ['user', 'imagen', 'si_quiere_ser_suscripto', 'monto_de_suscripcion', 'fecha_de_pago']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].widget = forms.HiddenInput()  # Oculta el campo 'user' en el formulario
+
+    def clean(self):
+        cleaned_data = super().clean()
+        si_quiere_ser_suscripto = cleaned_data.get('si_quiere_ser_suscripto')
+        monto_de_suscripcion = cleaned_data.get('monto_de_suscripcion')
+        fecha_de_pago = cleaned_data.get('fecha_de_pago')
+
+        if si_quiere_ser_suscripto and (not monto_de_suscripcion or not fecha_de_pago):
+            raise forms.ValidationError("Si se quiere suscribir, debe proporcionar el monto de suscripción y la fecha de pago.")
+
+        return cleaned_data

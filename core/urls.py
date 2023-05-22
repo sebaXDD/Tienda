@@ -37,7 +37,7 @@ urlpatterns = [
     ##################urls de los usuarios#######################
     path('user_setting/',user_setting,name="user_setting"),
     path('register/',register,name="register"),
- 
+    
     #############################################################
 
 ]

@@ -240,8 +240,6 @@ def register(request):
 
 
 
-
-
 #def modificar_cosas_user(request, cosas_user_id):
     cosas_user = get_object_or_404(CosasUser, id=cosas_user_id)
     
@@ -315,3 +313,15 @@ def user_setting(request):
 
     return render(request, 'core/user-setting.html', {'form': form, 'cosas_user_form': cosas_user_form})
 
+
+def crear_cosas_user(request):
+    if request.method == 'POST':
+        form2 = CosasUserForm(request.POST, request.FILES)
+        if form2.is_valid():
+            cosas_user = form2.save(commit=False)
+            cosas_user.user = request.user  # Asigna el usuario actual al campo 'user'
+            cosas_user.save()
+    else:
+        form2 = CosasUserForm()
+    
+    return render(request, 'core/user-setting.html', {'form2': form2})

@@ -30,6 +30,7 @@
                 {% csrf_token %} 
                 <table>
                     {{ form | crispy }}
+                    {{ form2 | crispy }}
                 </table>
                 <input type="submit" class="btn" value="Actualizar" style="background-color: #295690; color: white;" >
             </form>

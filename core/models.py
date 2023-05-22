@@ -43,7 +43,7 @@ class ItemCarrito(models.Model):
     
 
 class CosasUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customuser')
     imagen = models.ImageField(null=True,blank=True)
     si_quiere_ser_suscripto = models.BooleanField(default=False)
     monto_de_suscripcion = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
@@ -59,10 +59,3 @@ class CosasUser(models.Model):
 
     def str(self):
         return self.user.username
-
-class CosasUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    imagen = models.ImageField()
-    si_quiere_ser_suscripto = models.BooleanField()
-    monto_de_suscripcion = models.DecimalField(max_digits=10, decimal_places=2)
-    fecha_de_pago = models.DateField()
